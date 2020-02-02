@@ -30,8 +30,8 @@ public class ViewVitalJPanel extends javax.swing.JPanel {
         initComponents();
         this.vsh = vsh;
         if(vsh.getViewOrAbnormal() == "Abnormal"){
-            UpdateButton.setVisible(false);
-            saveBtn.setVisible(false);
+            //UpdateButton.setVisible(false);
+            //saveBtn.setVisible(false);
             jLabel1.setText("Abnormal Vital Sign");
         }
         populateTable();
@@ -292,11 +292,11 @@ public class ViewVitalJPanel extends javax.swing.JPanel {
             vs.setPulse(Integer.parseInt(pulseTextField.getText()));
             vs.setTemperature(Double.parseDouble(tempTextField.getText()));
             JOptionPane.showMessageDialog(null, "Successfully Updated!!!");
-        }else{
+        }else{ 
             JOptionPane.showMessageDialog(null, "Please select a row!!!");
         }
         setAllFieldBlank();
-        setAllEnabled(true);
+        setAllEnabled(false);
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void populateTable() {
