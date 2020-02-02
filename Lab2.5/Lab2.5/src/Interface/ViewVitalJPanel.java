@@ -295,6 +295,7 @@ public class ViewVitalJPanel extends javax.swing.JPanel {
         }else{ 
             JOptionPane.showMessageDialog(null, "Please select a row!!!");
         }
+        populateTable();
         setAllFieldBlank();
         setAllEnabled(false);
     }//GEN-LAST:event_saveBtnActionPerformed
