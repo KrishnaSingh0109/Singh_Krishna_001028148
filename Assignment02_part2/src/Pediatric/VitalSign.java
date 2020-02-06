@@ -92,20 +92,20 @@ public class VitalSign extends Patient{
         }
         printPatient(patientList);
         Scanner myscanner = new Scanner(System.in);
-//        System.out.println("\nPlease Enter Patient's Name to check vital signs for.\n");
-//        String searchName = myscanner.nextLine();
-//        ArrayList<Patient> searchedPatientsLists = searchPatients(patientList, searchName);
-//        
-//        System.out.println("\nPlease Enter Which of These Vistal Sign you want to check.\n");
-//        System.out.println("-Respiratory Rate");
-//        System.out.println("-Heart Rate");
-//        System.out.println("-Systolic Blood Rate");
-//        System.out.println("-check Weight in Kilos");
-//        System.out.println("-check Weight in Pounds\n");
-//        String vsign = myscanner.nextLine(); 
-//        String newSign = searchedVitalString(vsign);
-//        boolean isNormal = isThisVitalSignNormal(newSign, searchedPatientsLists);
-//        System.out.println("\nPatient "+searchName+"'s "+newSign+" is Normal : "+isNormal);
+        System.out.println("\nPlease Enter Patient's Name to check vital signs for.\n");
+        String searchName = myscanner.nextLine();
+        ArrayList<Patient> searchedPatientsLists = searchPatients(patientList, searchName);
+        
+        System.out.println("\nPlease Enter Which of These Vistal Sign you want to check.\n");
+        System.out.println("-Respiratory Rate");
+        System.out.println("-Heart Rate");
+        System.out.println("-Systolic Blood Rate");
+        System.out.println("-check Weight in Kilos");
+        System.out.println("-check Weight in Pounds\n");
+        String vsign = myscanner.nextLine(); 
+        String newSign = searchedVitalString(vsign);
+        boolean isNormal = isThisVitalSignNormal(newSign, searchedPatientsLists);
+        System.out.println("\nPatient "+searchName+"'s "+newSign+" is Normal : "+isNormal);
          
         
     }
