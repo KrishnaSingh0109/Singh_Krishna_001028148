@@ -22,6 +22,7 @@ public class ViewPanel extends javax.swing.JPanel {
     private ProductDirectory prodDir;
     private Product product;
     private JPanel panel;
+    private String compName="";
     ViewPanel(Product prod, ProductDirectory accDir, JPanel panel) {
         initComponents();
         this.product=prod;
@@ -29,6 +30,7 @@ public class ViewPanel extends javax.swing.JPanel {
         txtAvailablity.setText(String.valueOf(prod.getAvailNum()));
         txtPrice.setText(String.valueOf(prod.getPrice()));
         txtProdName.setText(prod.getName());
+        this.compName=prod.getName();
         txtDesc.setText(prod.getDescription());
         this.prodDir = accDir;
     }
@@ -162,7 +164,45 @@ public class ViewPanel extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
+            String priceText = txtPrice.getText();
+            double price =0;
+            int count=0;
+            String prodName="";
+            try{
+                price = Double.parseDouble(priceText);
+            }catch(NumberFormatException e){
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Price is not in number!!!");
+                return;
+            }
+            String availabilityTxt = txtAvailablity.getText();
+            int availability ;
+            try{
+                availability = Integer.parseInt(availabilityTxt);
+            }catch(NumberFormatException n){
+                JOptionPane.showMessageDialog(null, "Availability is not in number!!!");
+                return;
+            }
+            
+            try{
+                String temp=txtProdName.getText();
+                if(temp.length()==0){
+                   throw new RuntimeException("Please Enter the Product Name");
+                }
+                if(compName.equals(txtProdName.getText())){
+                }else if(prodDir.getProductDirectory().size()>=0){
+                    for(Product p : prodDir.getProductDirectory()) {
+                    if (p.getName().equals(txtProdName.getText())) {
+                        throw new RuntimeException("Product Name already exist");
+                        }
+                    }
+                }
+            }catch(RuntimeException e){
+                JOptionPane.showMessageDialog(null, e.getMessage());
+                return;
+            }
             setEnabled(false);
+            
             product.setName(txtProdName.getText());
             product.setPrice(Double.parseDouble(txtPrice.getText()));
             product.setAvailNum(Integer.parseInt(txtAvailablity.getText()));

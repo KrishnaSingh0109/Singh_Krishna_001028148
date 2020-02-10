@@ -6,6 +6,7 @@
 package Business;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *

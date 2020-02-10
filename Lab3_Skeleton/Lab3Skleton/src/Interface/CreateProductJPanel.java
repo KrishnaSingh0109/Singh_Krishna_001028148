@@ -136,8 +136,8 @@ public class CreateProductJPanel extends javax.swing.JPanel {
         
             String priceText = txtPrice.getText();
             double price =0;
-            String prodName = txtProdName.getText();
             int count=0;
+            String prodName="";
             try{
                 price = Double.parseDouble(priceText);
             }catch(NumberFormatException e){
@@ -154,34 +154,39 @@ public class CreateProductJPanel extends javax.swing.JPanel {
                 return;
             }
             try{
-                if(prodName.length()==0){
-                    System.out.println("Product Name ::" +prodName);
-                    count++;
+                String temp=txtProdName.getText();
+                if(temp.length()==0){
+                   throw new RuntimeException("Please Enter the Product Name");
                 }
-               
-            }catch(NullPointerException e){
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Please Enter The Product Name!!!");
+                if(prodDir.getProductDirectory().size()>=0){
+                    for(Product p : prodDir.getProductDirectory()) {
+                    if (p.getName().equals(txtProdName.getText())) {
+                        throw new RuntimeException("Product Name already exist");
+                        }
+                    }
+                }
+            }catch(RuntimeException e){
+                JOptionPane.showMessageDialog(null, e.getMessage());
                 return;
             }
             
             availability = Integer.parseInt(availabilityTxt);
-            if(count==0){
+            //if(count==0){
                 Product prod = prodDir.addProduct();
                 prod.setName(txtProdName.getText());
                 prod.setAvailNum(availability);
                 prod.setPrice(Double.parseDouble(txtPrice.getText()));
                 prod.setDescription(txtDescription.getText());
 
-                JOptionPane.showMessageDialog(null, "Product Created Successfully");
+                //JOptionPane.showMessageDialog(null, "Product Created Successfully");
                 txtProdName.setText("");
                 txtAvailablity.setText("");
                 txtPrice.setText("");
                 txtDescription.setText("");
-            }else{
-                JOptionPane.showMessageDialog(null, "Please feel * mandatory field!!!");
-                count=0;
-            }
+//            }else{
+//                JOptionPane.showMessageDialog(null, "Please feel * mandatory field!!!");
+//                count=0;
+//            }
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
