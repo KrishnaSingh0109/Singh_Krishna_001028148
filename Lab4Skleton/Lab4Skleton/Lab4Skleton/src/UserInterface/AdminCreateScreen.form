@@ -98,6 +98,7 @@
     <Component class="javax.swing.JTextField" name="txtPword">
       <Events>
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="passwordFocusLostActioned"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPwordActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtRePword">

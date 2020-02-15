@@ -83,6 +83,11 @@ public class AdminCreateScreen extends javax.swing.JPanel {
                 passwordFocusLostActioned(evt);
             }
         });
+        txtPword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPwordActionPerformed(evt);
+            }
+        });
 
         txtRePword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -174,68 +179,72 @@ public class AdminCreateScreen extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-        checkUserNameFormat(txtUser.getText());
-        checkPasswordFormat(txtPword.getText());
-        checkPasswordMatch(txtPword.getText(),txtRePword.getText());
-        String role="";
-        String userName="";
-        String password="";
-        Date date = new Date();
-        System.out.println("Date :: " +date);
-        userName = txtUser.getText();
-        password = txtPword.getText();
-        
-        try{
-            if(radioCustomer.isSelected()==false && radioSupplier.isSelected()==false){
-                throw new RuntimeException("Please Select The Option!!!");
+        if(!checkUserNameFormat(txtUser.getText())){
+        }else if(!checkPasswordFormat(txtPword.getText())){
+        }else if(!checkPasswordMatch(txtPword.getText(),txtRePword.getText())){
+        }else{    
+            String role="";
+            String userName="";
+            String password="";
+            Date date = new Date();
+            System.out.println("Date :: " +date);
+            userName = txtUser.getText();
+            password = txtPword.getText();
+
+            try{
+                if(radioCustomer.isSelected()==false && radioSupplier.isSelected()==false){
+                    throw new RuntimeException("Please Select The Option!!!");
+                }
+            }catch(RuntimeException e){
+                JOptionPane.showMessageDialog(null, e.getMessage());
+                return;
             }
-        }catch(RuntimeException e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            return;
+            if(radioCustomer.isSelected()){
+    //            role="CUSTOMER";
+    //            user.setRole(role);
+    //            user.setPassword(password);
+    //            user.setUserName(userName);
+    //            user.setDate(date);
+    //            System.out.println("Name :: "+user.getUserName());
+    //            
+    //            customerList.add(user);
+    //            System.out.println("Customer List Size:: " +customerList.size() );
+    //            System.out.println("User1 Details :: "+customerList);
+    //            CustomerDirectory cDir= new CustomerDirectory();
+    //            cDir.setCustomerList(customerList);
+    //            //System.out.println("Customer Directory Size:: " +cDir.getCustomerList().size() );
+    //            
+    //            admin.setCustDir(cDir);
+                //System.out.println("Admin Customer List Size:: " +admin.getCustDir().getCustomerList().size());
+                  admin.getCustDir().getCustomerList().add(new Customer(password, userName,date));
+
+            }else if(radioSupplier.isSelected()){
+                role="SUPPLIER";
+    //            user.setRole(role);
+    //            user.setPassword(password);
+    //            user.setUserName(userName);
+    //            user.setDate(date);
+    //            //System.out.println("User Details :: "+user);
+    //            List<User> supplierList ;
+    //            supplierList = new ArrayList<>();
+    //            supplierList.add(user);
+    //            SupplierDirectory sDir= new SupplierDirectory();
+    //            //System.out.println("Supplier List :: "+sDir.getSupplierList());
+    //            sDir.setSupplierList(supplierList);
+    //            admin.setSuppDir(sDir);
+    //            //System.out.println("Supplier Directory ::" +admin.getSuppDir());
+                  admin.getSuppDir().getSupplierList().add(new Supplier(password, userName));
+            }
+            JOptionPane.showMessageDialog(null, "Added Sucessfully");
+            txtUser.setText("");
+            txtPword.setText("");
+            txtRePword.setText("");
+            radioCustomer.setSelected(false);
+            radioSupplier.setSelected(false);
+            //admin.suppDir.setSupplierList(supplierList);
         }
-        if(radioCustomer.isSelected()){
-//            role="CUSTOMER";
-//            user.setRole(role);
-//            user.setPassword(password);
-//            user.setUserName(userName);
-//            user.setDate(date);
-//            System.out.println("Name :: "+user.getUserName());
-//            
-//            customerList.add(user);
-//            System.out.println("Customer List Size:: " +customerList.size() );
-//            System.out.println("User1 Details :: "+customerList);
-//            CustomerDirectory cDir= new CustomerDirectory();
-//            cDir.setCustomerList(customerList);
-//            //System.out.println("Customer Directory Size:: " +cDir.getCustomerList().size() );
-//            
-//            admin.setCustDir(cDir);
-            //System.out.println("Admin Customer List Size:: " +admin.getCustDir().getCustomerList().size());
-              admin.getCustDir().getCustomerList().add(new Customer(password, userName,date));
-            
-        }else if(radioSupplier.isSelected()){
-            role="SUPPLIER";
-//            user.setRole(role);
-//            user.setPassword(password);
-//            user.setUserName(userName);
-//            user.setDate(date);
-//            //System.out.println("User Details :: "+user);
-//            List<User> supplierList ;
-//            supplierList = new ArrayList<>();
-//            supplierList.add(user);
-//            SupplierDirectory sDir= new SupplierDirectory();
-//            //System.out.println("Supplier List :: "+sDir.getSupplierList());
-//            sDir.setSupplierList(supplierList);
-//            admin.setSuppDir(sDir);
-//            //System.out.println("Supplier Directory ::" +admin.getSuppDir());
-              admin.getSuppDir().getSupplierList().add(new Supplier(password, userName));
-        }
-        JOptionPane.showMessageDialog(null, "Added Sucessfully");
-        txtUser.setText("");
-        txtPword.setText("");
-        txtRePword.setText("");
-        radioCustomer.setSelected(false);
-        radioSupplier.setSelected(false);
-        //admin.suppDir.setSupplierList(supplierList);
+        
+        
         
        
     }//GEN-LAST:event_btnCreateActionPerformed
@@ -298,51 +307,91 @@ public class AdminCreateScreen extends javax.swing.JPanel {
 
     private void matchPasswordActioned(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_matchPasswordActioned
         // TODO add your handling code here:
-        checkPasswordMatch(txtPword.getText(),txtRePword.getText());
+       // checkPasswordMatch(txtPword.getText(),txtRePword.getText());
     }//GEN-LAST:event_matchPasswordActioned
 
-    private void passwordFocusLostActioned(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFocusLostActioned
+    private void txtPwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPwordActionPerformed
         // TODO add your handling code here:
-        checkPasswordFormat(txtPword.getText());
-    }//GEN-LAST:event_passwordFocusLostActioned
+    }//GEN-LAST:event_txtPwordActionPerformed
 
     private void userNameFocusLostActioned(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userNameFocusLostActioned
         // TODO add your handling code here:
-        checkUserNameFormat(txtUser.getText());
+        //checkUserNameFormat(txtUser.getText());
     }//GEN-LAST:event_userNameFocusLostActioned
 
-    public void checkUserNameFormat(String userName){
+    private void passwordFocusLostActioned(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFocusLostActioned
+        // TODO add your handling code here:
+        //checkPasswordFormat(txtPword.getText());
+    }//GEN-LAST:event_passwordFocusLostActioned
+
+    public boolean checkUserNameFormat(String userName){
         Pattern pattern = Pattern.compile("^[a-zA-Z0-9]+_[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-z]+$");
         Matcher matcher =pattern.matcher(userName);
         boolean b = matcher.matches();
         if(b==false){
-            txtUser.setBorder(BorderFactory.createLineBorder(Color.RED));
-            JOptionPane.showMessageDialog(null, "Not a valid username. Ex smit_jones@gmail.com");
+            try{
+
+                    
+                    throw new RuntimeException("Not a valid username. Ex smith_jones@gmail.com");
+
+            }catch(RuntimeException e){
+                JOptionPane.showMessageDialog(null, e.getMessage());
+                txtUser.setBorder(BorderFactory.createLineBorder(Color.RED));
+                jLabel1.setForeground(Color.RED);
+                txtUser.requestFocus(true);
+                
+            }
         }else{
-            txtUser.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+                txtUser.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+                jLabel1.setForeground(Color.BLACK);
         }
+        return b;
     }
     
-    public void checkPasswordFormat(String pswd){
+    public boolean checkPasswordFormat(String pswd){
         Pattern pattern = Pattern.compile("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$");
         Matcher matcher =pattern.matcher(pswd);
         boolean b = matcher.matches();
         if(b==false){
-            txtPword.setBorder(BorderFactory.createLineBorder(Color.RED));
-            JOptionPane.showMessageDialog(null, "Not a valid password. Must consist of 6 letters and contain one Uppercase letter, one Lowercase letter, one Number and one Special Character");
-            return;
+            try{
+
+                
+                throw new RuntimeException("Not a valid password. Must consist of 6 letters and contain one Uppercase letter, one Lowercase letter, one Number and one Special Character");
+
+            }catch(RuntimeException e){
+                JOptionPane.showMessageDialog(null, e.getMessage());
+                txtPword.setBorder(BorderFactory.createLineBorder(Color.RED));
+                jLabel2.setForeground(Color.RED);
+                txtPword.requestFocus(true);
+                
+            }
         }else{
             txtPword.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+            jLabel2.setForeground(Color.BLACK);
         }
+        return b;
     }
     
-    public void checkPasswordMatch(String pswd, String rePswd){
+    public boolean checkPasswordMatch(String pswd, String rePswd){
+        boolean b= true;
         if(!pswd.equals(rePswd)){
-            txtRePword.setBorder(BorderFactory.createLineBorder(Color.RED));
-            JOptionPane.showMessageDialog(null, "Password does not match!!!");
+            b=false;
+             try{
+
+                    throw new RuntimeException("Password does not match!!!");
+
+            }catch(RuntimeException e){
+                JOptionPane.showMessageDialog(null, e.getMessage());
+                txtRePword.setBorder(BorderFactory.createLineBorder(Color.RED));
+                jLabel3.setForeground(Color.RED);
+                txtRePword.requestFocus(true);
+                
+            }
         }else{
             txtRePword.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+            jLabel3.setForeground(Color.BLACK);
         }
+        return b;
     } 
     
     
