@@ -187,7 +187,6 @@ public class AdminCreateScreen extends javax.swing.JPanel {
             String userName="";
             String password="";
             Date date = new Date();
-            System.out.println("Date :: " +date);
             userName = txtUser.getText();
             password = txtPword.getText();
 
@@ -200,39 +199,12 @@ public class AdminCreateScreen extends javax.swing.JPanel {
                 return;
             }
             if(radioCustomer.isSelected()){
-    //            role="CUSTOMER";
-    //            user.setRole(role);
-    //            user.setPassword(password);
-    //            user.setUserName(userName);
-    //            user.setDate(date);
-    //            System.out.println("Name :: "+user.getUserName());
-    //            
-    //            customerList.add(user);
-    //            System.out.println("Customer List Size:: " +customerList.size() );
-    //            System.out.println("User1 Details :: "+customerList);
-    //            CustomerDirectory cDir= new CustomerDirectory();
-    //            cDir.setCustomerList(customerList);
-    //            //System.out.println("Customer Directory Size:: " +cDir.getCustomerList().size() );
-    //            
-    //            admin.setCustDir(cDir);
-                //System.out.println("Admin Customer List Size:: " +admin.getCustDir().getCustomerList().size());
+   
                   admin.getCustDir().getCustomerList().add(new Customer(password, userName,date));
 
             }else if(radioSupplier.isSelected()){
                 role="SUPPLIER";
-    //            user.setRole(role);
-    //            user.setPassword(password);
-    //            user.setUserName(userName);
-    //            user.setDate(date);
-    //            //System.out.println("User Details :: "+user);
-    //            List<User> supplierList ;
-    //            supplierList = new ArrayList<>();
-    //            supplierList.add(user);
-    //            SupplierDirectory sDir= new SupplierDirectory();
-    //            //System.out.println("Supplier List :: "+sDir.getSupplierList());
-    //            sDir.setSupplierList(supplierList);
-    //            admin.setSuppDir(sDir);
-    //            //System.out.println("Supplier Directory ::" +admin.getSuppDir());
+   
                   admin.getSuppDir().getSupplierList().add(new Supplier(password, userName));
             }
             JOptionPane.showMessageDialog(null, "Added Sucessfully");
@@ -376,7 +348,7 @@ public class AdminCreateScreen extends javax.swing.JPanel {
         boolean b= true;
         if(!pswd.equals(rePswd)){
             b=false;
-             try{
+            try{
 
                     throw new RuntimeException("Password does not match!!!");
 
